@@ -1,0 +1,365 @@
+/* ============================================================
+ * Jeancarlo Barrios — Personal Design System
+ * Tokens: Catppuccin Mocha (dark) + Latte (light), JetBrains Mono.
+ *
+ * Theme is selected by [data-theme="dark"|"light"] on <html> or any
+ * scoped ancestor. Defaults to dark (mocha) when no attribute is set.
+ *
+ * Catppuccin palettes are MIT-licensed: https://catppuccin.com
+ * ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* If you'd like to ship JetBrains Mono offline, drop the .woff2 files in
+ * ./fonts/ and replace the @import above with this block:
+ *
+ * @font-face {
+ *   font-family: 'JetBrains Mono';
+ *   src: url('./fonts/JetBrainsMono[wght].woff2') format('woff2-variations');
+ *   font-weight: 100 800;
+ *   font-style: normal;
+ *   font-display: swap;
+ * }
+ * @font-face {
+ *   font-family: 'JetBrains Mono';
+ *   src: url('./fonts/JetBrainsMono-Italic[wght].woff2') format('woff2-variations');
+ *   font-weight: 100 800;
+ *   font-style: italic;
+ *   font-display: swap;
+ * }
+ */
+
+/* ============================================================
+ * Catppuccin Mocha (dark) — default
+ * https://catppuccin.com/palette
+ * ============================================================ */
+:root,
+[data-theme="dark"] {
+  /* — Palette: Mocha — */
+  --ctp-rosewater: #f5e0dc;
+  --ctp-flamingo:  #f2cdcd;
+  --ctp-pink:      #f5c2e7;
+  --ctp-mauve:     #cba6f7;
+  --ctp-red:       #f38ba8;
+  --ctp-maroon:    #eba0ac;
+  --ctp-peach:     #fab387;
+  --ctp-yellow:    #f9e2af;
+  --ctp-green:     #a6e3a1;
+  --ctp-teal:      #94e2d5;
+  --ctp-sky:       #89dceb;
+  --ctp-sapphire:  #74c7ec;
+  --ctp-blue:      #89b4fa;
+  --ctp-lavender:  #b4befe;
+
+  --ctp-text:      #cdd6f4;
+  --ctp-subtext1:  #bac2de;
+  --ctp-subtext0:  #a6adc8;
+  --ctp-overlay2:  #9399b2;
+  --ctp-overlay1:  #7f849c;
+  --ctp-overlay0:  #6c7086;
+  --ctp-surface2:  #585b70;
+  --ctp-surface1:  #45475a;
+  --ctp-surface0:  #313244;
+  --ctp-base:      #1e1e2e;
+  --ctp-mantle:    #181825;
+  --ctp-crust:     #11111b;
+
+  /* — Semantic surfaces & text — */
+  --bg:        var(--ctp-base);
+  --bg-inset:  var(--ctp-mantle);   /* terminal "frame" */
+  --bg-panel:  var(--ctp-surface0); /* code block, inline panels */
+  --bg-deep:   var(--ctp-crust);    /* darkest, hairline contrast */
+
+  --fg:        var(--ctp-text);     /* primary text */
+  --fg-muted:  var(--ctp-subtext1); /* secondary text */
+  --fg-dim:    var(--ctp-subtext0); /* tertiary, captions */
+  --fg-faint:  var(--ctp-overlay1); /* metadata, "off" */
+
+  /* — Borders — */
+  --border:        var(--ctp-surface1);
+  --border-subtle: var(--ctp-surface0);
+  --border-strong: var(--ctp-surface2);
+
+  /* — Accent — the persistent warm coffee-coded color — */
+  --accent:        var(--ctp-peach);
+  --accent-hover:  var(--ctp-yellow);
+
+  /* — Syntax accents (use sparingly, mostly inside code) — */
+  --syn-keyword:   var(--ctp-mauve);
+  --syn-string:    var(--ctp-green);
+  --syn-number:    var(--ctp-peach);
+  --syn-fn:        var(--ctp-blue);
+  --syn-type:      var(--ctp-yellow);
+  --syn-comment:   var(--ctp-overlay1);
+  --syn-error:     var(--ctp-red);
+  --syn-tag:       var(--ctp-teal);
+
+  /* — Selection — */
+  --selection-bg:  var(--ctp-surface2);
+  --selection-fg:  var(--ctp-text);
+}
+
+/* ============================================================
+ * Catppuccin Latte (light)
+ * ============================================================ */
+[data-theme="light"] {
+  --ctp-rosewater: #dc8a78;
+  --ctp-flamingo:  #dd7878;
+  --ctp-pink:      #ea76cb;
+  --ctp-mauve:     #8839ef;
+  --ctp-red:       #d20f39;
+  --ctp-maroon:    #e64553;
+  --ctp-peach:     #fe640b;
+  --ctp-yellow:    #df8e1d;
+  --ctp-green:     #40a02b;
+  --ctp-teal:      #179299;
+  --ctp-sky:       #04a5e5;
+  --ctp-sapphire:  #209fb5;
+  --ctp-blue:      #1e66f5;
+  --ctp-lavender:  #7287fd;
+
+  --ctp-text:      #4c4f69;
+  --ctp-subtext1:  #5c5f77;
+  --ctp-subtext0:  #6c6f85;
+  --ctp-overlay2:  #7c7f93;
+  --ctp-overlay1:  #8c8fa1;
+  --ctp-overlay0:  #9ca0b0;
+  --ctp-surface2:  #acb0be;
+  --ctp-surface1:  #bcc0cc;
+  --ctp-surface0:  #ccd0da;
+  --ctp-base:      #eff1f5;
+  --ctp-mantle:    #e6e9ef;
+  --ctp-crust:     #dce0e8;
+
+  --bg:        var(--ctp-base);
+  --bg-inset:  var(--ctp-mantle);
+  --bg-panel:  var(--ctp-surface0);
+  --bg-deep:   var(--ctp-crust);
+
+  --fg:        var(--ctp-text);
+  --fg-muted:  var(--ctp-subtext1);
+  --fg-dim:    var(--ctp-subtext0);
+  --fg-faint:  var(--ctp-overlay0);
+
+  --border:        var(--ctp-surface1);
+  --border-subtle: var(--ctp-surface0);
+  --border-strong: var(--ctp-surface2);
+
+  --accent:        var(--ctp-peach);
+  --accent-hover:  var(--ctp-maroon);
+
+  --syn-keyword:   var(--ctp-mauve);
+  --syn-string:    var(--ctp-green);
+  --syn-number:    var(--ctp-peach);
+  --syn-fn:        var(--ctp-blue);
+  --syn-type:      var(--ctp-yellow);
+  --syn-comment:   var(--ctp-overlay0);
+  --syn-error:     var(--ctp-red);
+  --syn-tag:       var(--ctp-teal);
+
+  --selection-bg:  var(--ctp-surface1);
+  --selection-fg:  var(--ctp-text);
+}
+
+/* ============================================================
+ * Type — JetBrains Mono everywhere
+ * ============================================================ */
+:root {
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Menlo',
+               'Cascadia Mono', 'Consolas', 'Liberation Mono', monospace;
+  /* Aliased for completeness; the brand uses ONE family. */
+  --font-sans: var(--font-mono);
+  --font-serif: var(--font-mono);
+
+  /* Sizes — small base for the dense terminal feel */
+  --fs-xs:   12px;
+  --fs-sm:   13px;
+  --fs-base: 14px;
+  --fs-md:   16px;
+  --fs-lg:   18px;
+  --fs-xl:   22px;
+  --fs-2xl:  28px;
+  --fs-3xl:  36px;
+
+  /* Line heights */
+  --lh-tight: 1.25;
+  --lh-snug:  1.4;
+  --lh-body:  1.6;
+  --lh-loose: 1.8;
+
+  /* Weights */
+  --fw-light:  300;
+  --fw-body:   400;
+  --fw-medium: 500;
+  --fw-bold:   600;
+  --fw-black:  700;
+
+  /* Tracking */
+  --tracking-tight: -0.01em;
+  --tracking-norm:  0;
+  --tracking-wide:  0.02em;
+  --tracking-caps:  0.06em;
+
+  /* — Spacing scale (4px base) — */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+
+  /* — Radii — almost zero — */
+  --radius-0: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px; /* avoid using; reserved */
+
+  /* — Layout — */
+  --content-width: 640px;
+  --page-pad:      24px;
+  --header-height: 56px;
+}
+
+/* ============================================================
+ * Element baseline — drop into any page after this CSS.
+ * ============================================================ */
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  font-feature-settings: "calt" 1, "liga" 0; /* keep ligatures off, they distract in body */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+/* — Headings: same family, differentiated by weight + size + color — */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-bold);
+  color: var(--fg);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+h1 { font-size: var(--fs-3xl); font-weight: var(--fw-black); }
+h2 { font-size: var(--fs-2xl); }
+h3 { font-size: var(--fs-xl); }
+h4 { font-size: var(--fs-lg); }
+h5 { font-size: var(--fs-md); }
+h6 { font-size: var(--fs-base); color: var(--fg-muted); text-transform: uppercase; letter-spacing: var(--tracking-caps); }
+
+p {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--fg);
+}
+
+/* — Links — always underlined, accent on hover — */
+a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: currentColor;
+}
+a:hover, a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+a.is-active {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* — Code — */
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-feature-settings: "calt" 1, "liga" 1; /* ligatures ARE allowed inside code */
+}
+:not(pre) > code {
+  background: var(--bg-panel);
+  color: var(--fg);
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92em;
+}
+pre {
+  background: var(--bg-panel);
+  color: var(--fg);
+  padding: var(--space-4);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+  margin: 0;
+}
+
+/* — Hairline rule — */
+hr {
+  border: 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-6) 0;
+}
+
+/* — Quote — */
+blockquote {
+  margin: 0;
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--border);
+  color: var(--fg-muted);
+}
+
+/* — Lists — */
+ul, ol { margin: 0; padding-left: var(--space-5); }
+li { margin: 0 0 var(--space-1) 0; }
+
+/* — Buttons / [bracketed text] — there are nearly none, but here's the spec — */
+.btn-bracket {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--fg-muted);
+  cursor: pointer;
+}
+.btn-bracket::before { content: '['; color: var(--fg-faint); }
+.btn-bracket::after  { content: ']'; color: var(--fg-faint); }
+.btn-bracket:hover, .btn-bracket:focus-visible {
+  color: var(--accent);
+}
+
+/* — The wordmark — */
+.wordmark {
+  font-weight: var(--fw-black);
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg);
+}
+.wordmark .prompt { color: var(--accent); margin-left: 1px; }
+
+/* — Solid (non-blinking) terminal cursor — */
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  vertical-align: -0.12em;
+  background: var(--accent);
+  margin-left: 2px;
+}
