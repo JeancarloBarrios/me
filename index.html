@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jeancarlo.info — jeancarlo barrios</title>
+<meta name="description" content="jeancarlo barrios. software engineer. distributed systems, open source, coffee, conservation.">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  /* ============================================================
+   * jeancarlo.info — single-page site
+   * Static HTML/CSS. Light vanilla JS only for theme toggle.
+   * ============================================================ */
+
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* — Header — */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+    padding: 0 var(--page-pad);
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--bg);
+  }
+  .site-header .wordmark {
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    font-size: var(--fs-md);
+    text-decoration: none;
+    color: var(--fg);
+  }
+  .site-header .wordmark .prompt {
+    color: var(--accent);
+    margin-left: 1px;
+  }
+  .site-header nav {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  .site-header nav a {
+    color: var(--fg-muted);
+    text-decoration: none;
+    font-size: var(--fs-sm);
+  }
+  .site-header nav a:hover { color: var(--accent); }
+  .site-header nav a .ext { color: var(--fg-faint); }
+
+  .theme-btn {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: var(--fg-faint);
+    cursor: pointer;
+    font-size: var(--fs-sm);
+  }
+  .theme-btn:hover { color: var(--accent); }
+
+  /* — Page shell — */
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-7) var(--page-pad) var(--space-8);
+  }
+
+  /* — Section divider rendered as monospace dashes — */
+  .rule {
+    color: var(--fg-faint);
+    white-space: pre;
+    overflow: hidden;
+    font-size: var(--fs-sm);
+    margin: var(--space-7) 0;
+    user-select: none;
+    line-height: 1;
+  }
+
+  /* — Hero — */
+  .hero h1 {
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-black);
+    letter-spacing: var(--tracking-wide);
+    line-height: 1;
+    margin-bottom: var(--space-5);
+  }
+  .hero h1 .prompt { color: var(--accent); }
+  .hero .lede {
+    color: var(--fg-muted);
+    font-size: var(--fs-md);
+    line-height: 1.65;
+    max-width: 56ch;
+    margin: 0;
+  }
+  .cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 0.95em;
+    vertical-align: -0.08em;
+    background: var(--accent);
+    margin-left: 4px;
+  }
+
+  /* — Section labels — */
+  .label {
+    font-size: var(--fs-xs);
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    font-weight: var(--fw-medium);
+    margin: 0 0 var(--space-4);
+  }
+
+  /* — Prose — */
+  .prose p {
+    color: var(--fg);
+    font-size: var(--fs-md);
+    line-height: 1.75;
+    margin: 0 0 var(--space-4);
+    max-width: 60ch;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose .muted { color: var(--fg-muted); }
+
+  /* — Row lists — */
+  .row-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .row-list .row {
+    display: grid;
+    grid-template-columns: 160px 1fr auto;
+    gap: var(--space-4);
+    align-items: baseline;
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .row-list .row:last-child { border-bottom: 1px solid var(--border-subtle); }
+  .row-list .row .name {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+    font-weight: var(--fw-medium);
+  }
+  .row-list .row .name:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+  .row-list .row .desc { color: var(--fg-muted); }
+  .row-list .row .meta {
+    color: var(--fg-faint);
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* — Writing rows: date · title — */
+  .row-list.writing .row {
+    grid-template-columns: 96px 1fr auto;
+  }
+  .row-list.writing .row .date {
+    color: var(--fg-faint);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-wide);
+    white-space: nowrap;
+  }
+  .row-list.writing .row .title {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--border);
+  }
+  .row-list.writing .row .title:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+  .row-list.writing .row .read {
+    color: var(--fg-faint);
+    font-size: var(--fs-xs);
+  }
+
+  /* — Featured project block (research case study) — */
+  .featured {
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: var(--space-5) 0;
+  }
+  .featured .head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4);
+    align-items: baseline;
+    margin-bottom: var(--space-4);
+  }
+  .featured h3 {
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-bold);
+    color: var(--fg);
+    line-height: 1.3;
+    letter-spacing: var(--tracking-tight);
+    margin: 0;
+    max-width: 56ch;
+  }
+  .featured .meta {
+    color: var(--fg-faint);
+    font-size: var(--fs-xs);
+    white-space: nowrap;
+    letter-spacing: var(--tracking-wide);
+  }
+  .featured .summary {
+    color: var(--fg-muted);
+    margin: 0 0 var(--space-5);
+    max-width: 60ch;
+    line-height: 1.7;
+  }
+  .featured h4 {
+    font-size: var(--fs-xs);
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-caps);
+    font-weight: var(--fw-medium);
+    margin: var(--space-5) 0 var(--space-3);
+  }
+  .featured .scope {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-2);
+    display: grid;
+    gap: var(--space-2);
+  }
+  .featured .scope li {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: var(--space-4);
+    color: var(--fg);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .featured .scope .k {
+    color: var(--fg-faint);
+    letter-spacing: var(--tracking-wide);
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .featured .scope .v { color: var(--fg-muted); }
+  .featured .scope .v strong {
+    color: var(--fg);
+    font-weight: var(--fw-medium);
+  }
+  .featured .themes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .featured .themes li {
+    color: var(--fg-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+  }
+  .featured .themes li::before {
+    content: '·';
+    position: absolute;
+    left: 6px;
+    color: var(--accent);
+  }
+  .featured .themes li strong {
+    color: var(--fg);
+    font-weight: var(--fw-medium);
+  }
+  .featured .insight {
+    margin: var(--space-5) 0 0;
+    padding: var(--space-4) 0 0;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--fg);
+    font-size: var(--fs-md);
+    line-height: 1.7;
+    max-width: 60ch;
+  }
+  .featured .insight .kw {
+    color: var(--accent);
+    font-weight: var(--fw-medium);
+  }
+  .featured .tags {
+    margin-top: var(--space-5);
+    color: var(--fg-faint);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-wide);
+  }
+  .featured .tags .sep { margin: 0 6px; }
+
+  /* — About — */
+  .elsewhere {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2) var(--space-5);
+  }
+  .elsewhere a {
+    color: var(--fg-muted);
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+  }
+  .elsewhere a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+  .elsewhere .ext { color: var(--fg-faint); }
+
+  /* — Footer — */
+  .site-footer {
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-4) var(--page-pad);
+    width: 100%;
+  }
+  .site-footer .inner {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    color: var(--fg-faint);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--tracking-wide);
+  }
+  .site-footer a { color: var(--fg-faint); }
+  .site-footer a:hover { color: var(--accent); }
+
+  /* — Anchored sections offset for sticky header — */
+  section[id] { scroll-margin-top: calc(var(--header-height) + 16px); }
+
+  /* — Responsive — */
+  @media (max-width: 640px) {
+    .site-header nav { gap: 12px; }
+    .site-header nav .hide-sm { display: none; }
+    main { padding: var(--space-6) var(--page-pad) var(--space-7); }
+    .hero h1 { font-size: var(--fs-2xl); }
+    .row-list .row,
+    .row-list.writing .row {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+      padding: var(--space-3) 0;
+    }
+    .row-list .row .meta,
+    .row-list.writing .row .date,
+    .row-list.writing .row .read { font-size: var(--fs-xs); }
+    .featured .head { grid-template-columns: 1fr; }
+    .featured .scope li { grid-template-columns: 1fr; gap: var(--space-1); }
+    .elsewhere { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header class="site-header" data-screen-label="header">
+    <a class="wordmark" href="#top" aria-label="jcb home">jcb<span class="prompt">❯</span></a>
+    <nav aria-label="primary">
+      <a href="#projects">projects</a>
+      <a href="#about">about</a>
+      <a href="https://github.com/JeancarloBarrios" target="_blank" rel="noopener noreferrer">github <span class="ext">↗</span></a>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="toggle theme">[mocha]</button>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" data-screen-label="01 hero">
+      <h1>jcb<span class="prompt">❯</span><span class="cursor" aria-hidden="true"></span></h1>
+      <p class="lede">i'm jeancarlo barrios. software engineer based between guatemala and new york. i work on distributed systems, open source, and ecosystem research — consensus engines, payments rails, ecological-credit infrastructure. i drink a lot of coffee and care about conservation.</p>
+    </section>
+
+    <div class="rule" aria-hidden="true">─────────────────────────────────────────────────────────────────────</div>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" data-screen-label="03 projects">
+      <h2 class="label">projects</h2>
+
+      <ul class="row-list">
+        <li class="row">
+          <a class="name" href="https://github.com/ybird-labs/claims" target="_blank" rel="noopener noreferrer">claims engine</a>
+          <span class="desc">impact accounting framework for creating, validating, and composing verifiable claims</span>
+          <span class="meta">ybird-labs</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://github.com/ybird-labs/invariant" target="_blank" rel="noopener noreferrer">invariant</a>
+          <span class="desc">a rust workspace exploring journaled execution and wasm-sandboxed invariants</span>
+          <span class="meta">rs · wasm</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://agoric.com/" target="_blank" rel="noopener noreferrer">agoric</a>
+          <span class="desc">cosmos-based chain for cross-chain orchestration — smart contracts coordinating workflows, capital, and time-based triggers across blockchains, secured by an object-capability model</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://www.regen.network/" target="_blank" rel="noopener noreferrer">regen network</a>
+          <span class="desc">cosmos-based blockchain, registry, and marketplace for ecological credits and regenerative finance</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://docs.cosmos.network/" target="_blank" rel="noopener noreferrer">cosmos sdk</a>
+          <span class="desc">open-source framework for building modular, application-specific blockchains</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://edoo.io/" target="_blank" rel="noopener noreferrer">edoo</a>
+          <span class="desc">school management platform — academic operations, admissions, finance, lms, ai analytics</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://exeboard.com/" target="_blank" rel="noopener noreferrer">exeboard</a>
+          <span class="desc">board governance and meeting-management — agendas, voting, minutes, signatures</span>
+          <span class="meta">research</span>
+        </li>
+      </ul>
+
+      <!-- ============ FEATURED RESEARCH ============ -->
+      <h3 class="label" style="margin-top: var(--space-7);">research</h3>
+      <article class="featured" aria-labelledby="research-title">
+        <header class="head">
+          <h3 id="research-title">ecosystem research: institutional saas, refi, and cosmos infrastructure</h3>
+          <span class="meta">2025 · research</span>
+        </header>
+        <p class="summary">i mapped a set of projects across education technology, board governance, regenerative finance, and cosmos-based blockchain infrastructure — turning scattered information from websites, docs, repositories, and ecosystem sources into a clear analysis of what each project does, who it serves, how it works, and where it overlaps with adjacent work in coordination, governance, ecological assets, and public goods.</p>
+
+        <h4>scope</h4>
+        <ul class="scope">
+          <li><span class="k">regen network</span><span class="v">cosmos-based blockchain, registry, and marketplace for ecological credits and regenerative finance.</span></li>
+          <li><span class="k">cosmos sdk</span><span class="v">open-source framework for building modular, application-specific blockchains.</span></li>
+        </ul>
+
+        <h4>themes</h4>
+        <ul class="themes">
+          <li><strong>institutional coordination.</strong> edoo and exeboard solve coordination problems for traditional institutions — schools and boards.</li>
+          <li><strong>governance systems.</strong> exeboard handles formal board governance; dao dao and adjacent tools represent on-chain governance patterns.</li>
+          <li><strong>regenerative finance.</strong> regen network, open forest protocol, toucan, and klimadao focus on ecological credits, carbon markets, mrv, and environmental assets.</li>
+          <li><strong>appchain infrastructure.</strong> cosmos sdk lets projects like regen network run their own chain — custom logic, governance, validators, interoperability.</li>
+          <li><strong>public-goods funding.</strong> gitcoin, giveth, karma, hypercerts, and open source observer help track, fund, and evaluate impact-oriented work.</li>
+          <li><strong>verifiable claims.</strong> cheqd, ixo, hypercerts, and regen all connect to the broader need for trusted data, credentials, attestations, and impact records.</li>
+        </ul>
+
+        <p class="insight"><span class="kw">main insight —</span> across very different domains, the common problem is coordination. schools, boards, daos, ecological-credit markets, and public-goods funders all need trusted records, clear governance, accountability, and reliable reporting. traditional saas usually coordinates within institutions; web3 projects often coordinate across open networks, communities, and markets. they're approaching the same problems from different directions.</p>
+
+        <p class="tags">research<span class="sep">·</span>ecosystem mapping<span class="sep">·</span>web3<span class="sep">·</span>cosmos sdk<span class="sep">·</span>refi<span class="sep">·</span>governance<span class="sep">·</span>saas<span class="sep">·</span>strategy</p>
+      </article>
+    </section>
+
+    <div class="rule" aria-hidden="true">─────────────────────────────────────────────────────────────────────</div>
+
+    <div class="rule" aria-hidden="true">─────────────────────────────────────────────────────────────────────</div>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" data-screen-label="05 about">
+      <h2 class="label">about</h2>
+      <div class="prose">
+        <p>i'm jeancarlo barrios. i'm a software engineer based between guatemala and new york. i work mostly on distributed systems — consensus engines, payments rails, durable workflows — and most of what i build is open source.</p>
+        <p>i've spent time researching <a href="https://www.regen.network/" target="_blank" rel="noopener noreferrer">regen network</a> and the <a href="https://docs.cosmos.network/" target="_blank" rel="noopener noreferrer">cosmos sdk</a> — mapping how appchains, ecological credits, and coordination infrastructure fit together. more recently i've been working on the <a href="https://github.com/ybird-labs/claims" target="_blank" rel="noopener noreferrer">claims engine</a> and <a href="https://github.com/ybird-labs/invariant" target="_blank" rel="noopener noreferrer">invariant</a> at ybird-labs.</p>
+        <p>outside of code: i drink a lot of specialty coffee and care about conservation. neither of those things show up here as decoration. they show up as the kinds of problems i pick to work on.</p>
+        <p>if you'd like to talk: <a href="/cdn-cgi/l/email-protection#b0dad3f0c9d2d9c2d49ec8c9ca"><span class="__cf_email__" data-cfemail="402a230039222932246e38393a">[email&#160;protected]</span></a>.</p>
+      </div>
+
+      <h3 class="label" style="margin-top: var(--space-6);">elsewhere</h3>
+      <ul class="elsewhere">
+        <li><a href="https://github.com/JeancarloBarrios" target="_blank" rel="noopener noreferrer">github <span class="ext">↗</span></a></li>
+        <li><a href="#" rel="noopener noreferrer">read.cv <span class="ext">↗</span></a></li>
+        <li><a href="#" rel="noopener noreferrer">are.na <span class="ext">↗</span></a></li>
+        <li><a href="#" rel="noopener noreferrer">rss <span class="ext">↗</span></a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>jeancarlo barrios · 2026</span>
+      <span><a href="#top">top ↑</a></span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // — theme toggle (mocha / latte) — persists in localStorage —
+    (function () {
+      var html = document.documentElement;
+      var btn = document.getElementById('theme-btn');
+      var saved = null;
+      try { saved = localStorage.getItem('jcb-theme'); } catch (e) {}
+      if (saved === 'light' || saved === 'dark') {
+        html.setAttribute('data-theme', saved);
+      }
+      function render() {
+        var t = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        btn.textContent = t === 'dark' ? '[mocha]' : '[latte]';
+        btn.title = 'switch to ' + (t === 'dark' ? 'latte' : 'mocha');
+      }
+      btn.addEventListener('click', function () {
+        var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem('jcb-theme', next); } catch (e) {}
+        render();
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
