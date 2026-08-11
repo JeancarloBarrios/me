@@ -1,6 +1,13 @@
+# zola output
+public/
+.zola-bin/
+
 # wrangler files
 .wrangler
 .dev.vars*
 !.dev.vars.example
 .env*
 !.env.example
+
+# macos
+.DS_Store

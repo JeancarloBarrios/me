@@ -5,8 +5,11 @@
   "observability": {
     "enabled": true
   },
+  "build": {
+    "command": "sh scripts/build.sh"
+  },
   "assets": {
-    "directory": "."
+    "directory": "./public"
   },
   "compatibility_flags": [
     "nodejs_compat"

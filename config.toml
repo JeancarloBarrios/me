@@ -1,0 +1,22 @@
+# jeancarlo.info — zola config
+
+base_url = "https://jeancarlo.info"
+title = "jeancarlo.info — jeancarlo barrios"
+description = "jeancarlo barrios. software engineer. distributed systems, open source, coffee, conservation."
+default_language = "en"
+
+compile_sass = false
+build_search_index = false
+
+# atom feed at /atom.xml, fed by content/writing/
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+# syntax highlighting is off: code blocks render plain on the --bg-panel
+# surface, which fits the dual mocha/latte themes. to enable later, add a
+# [markdown.highlighting] block with light_theme/dark_theme.
+
+[extra]
+author = "jeancarlo barrios"
+email = "jc@ybird.xyz"
+github = "https://github.com/JeancarloBarrios"

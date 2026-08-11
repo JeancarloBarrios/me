@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ config.title }}{% endblock title %}</title>
+<meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path="atom.xml") }}">
+<link rel="stylesheet" href="/colors_and_type.css">
+<link rel="stylesheet" href="/site.css">
+<script>
+  // apply saved theme before first paint to avoid a flash
+  (function () {
+    try {
+      var t = localStorage.getItem('jcb-theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
+</head>
+<body>
+  <header class="site-header" data-screen-label="header">
+    <a class="wordmark" href="/" aria-label="jcb home">jcb<span class="prompt">❯</span></a>
+    <nav aria-label="primary">
+      <a href="/#projects">projects</a>
+      <a href="/writing/">writing</a>
+      <a href="/#about" class="hide-sm">about</a>
+      <a href="{{ config.extra.github }}" target="_blank" rel="noopener noreferrer">github <span class="ext">↗</span></a>
+      <button class="theme-btn" id="theme-btn" type="button" aria-label="toggle theme">[mocha]</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    {% block content %}{% endblock content %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <span>{{ config.extra.author }} · {{ now() | date(format="%Y") }}</span>
+      <span><a href="#top">top ↑</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // — theme toggle (mocha / latte) — persists in localStorage —
+    (function () {
+      var html = document.documentElement;
+      var btn = document.getElementById('theme-btn');
+      function render() {
+        var t = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        btn.textContent = t === 'dark' ? '[mocha]' : '[latte]';
+        btn.title = 'switch to ' + (t === 'dark' ? 'latte' : 'mocha');
+      }
+      btn.addEventListener('click', function () {
+        var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem('jcb-theme', next); } catch (e) {}
+        render();
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>

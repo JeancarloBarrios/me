@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}writing — {{ config.extra.author }}{% endblock title %}
+
+{% block content %}
+
+    <section id="writing" data-screen-label="writing index">
+      <h2 class="label">writing</h2>
+      <ul class="row-list writing">
+        {% for page in section.pages %}
+        <li class="row">
+          <span class="date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+          <a class="title" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+          <span class="read">{{ page.reading_time }} min</span>
+        </li>
+        {% else %}
+        <li class="empty">nothing here yet — subscribe via <a href="{{ get_url(path="atom.xml") }}">rss</a> for when there is.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+{% endblock content %}
