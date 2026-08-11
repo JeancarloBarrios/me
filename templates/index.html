@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" data-screen-label="01 hero">
+      <h1>jcb<span class="prompt">❯</span><span class="cursor" aria-hidden="true"></span></h1>
+      <p class="lede">i'm jeancarlo barrios. software engineer. i work on distributed systems, open source, and ecosystem research — consensus engines, payments rails, ecological-credit infrastructure. i drink a lot of coffee and care about conservation.</p>
+    </section>
+
+    <div class="rule" aria-hidden="true">─────────────────────────────────────────────────────────────────────</div>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" data-screen-label="03 projects">
+      <h2 class="label">projects</h2>
+
+      <ul class="row-list">
+        <li class="row">
+          <a class="name" href="https://github.com/ybird-labs/claims" target="_blank" rel="noopener noreferrer">claims engine</a>
+          <span class="desc">impact accounting framework for creating, validating, and composing verifiable claims</span>
+          <span class="meta">ybird-labs</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://github.com/ybird-labs/invariant" target="_blank" rel="noopener noreferrer">invariant</a>
+          <span class="desc">a rust workspace exploring journaled execution and wasm-sandboxed invariants</span>
+          <span class="meta">rs · wasm</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://agoric.com/" target="_blank" rel="noopener noreferrer">agoric</a>
+          <span class="desc">cosmos-based chain for cross-chain orchestration — smart contracts coordinating workflows, capital, and time-based triggers across blockchains, secured by an object-capability model</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://www.regen.network/" target="_blank" rel="noopener noreferrer">regen network</a>
+          <span class="desc">cosmos-based blockchain, registry, and marketplace for ecological credits and regenerative finance</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://docs.cosmos.network/" target="_blank" rel="noopener noreferrer">cosmos sdk</a>
+          <span class="desc">open-source framework for building modular, application-specific blockchains</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://edoo.io/" target="_blank" rel="noopener noreferrer">edoo</a>
+          <span class="desc">school management platform — academic operations, admissions, finance, lms, ai analytics</span>
+          <span class="meta">research</span>
+        </li>
+        <li class="row">
+          <a class="name" href="https://exeboard.com/" target="_blank" rel="noopener noreferrer">exeboard</a>
+          <span class="desc">board governance and meeting-management — agendas, voting, minutes, signatures</span>
+          <span class="meta">research</span>
+        </li>
+      </ul>
+
+      <!-- ============ FEATURED RESEARCH ============ -->
+      <h3 class="label" style="margin-top: var(--space-7);">research</h3>
+      <article class="featured" aria-labelledby="research-title">
+        <header class="head">
+          <h3 id="research-title">ecosystem research: institutional saas, refi, and cosmos infrastructure</h3>
+          <span class="meta">2025 · research</span>
+        </header>
+        <p class="summary">i mapped a set of projects across education technology, board governance, regenerative finance, and cosmos-based blockchain infrastructure — turning scattered information from websites, docs, repositories, and ecosystem sources into a clear analysis of what each project does, who it serves, how it works, and where it overlaps with adjacent work in coordination, governance, ecological assets, and public goods.</p>
+
+        <h4>scope</h4>
+        <ul class="scope">
+          <li><span class="k">regen network</span><span class="v">cosmos-based blockchain, registry, and marketplace for ecological credits and regenerative finance.</span></li>
+          <li><span class="k">cosmos sdk</span><span class="v">open-source framework for building modular, application-specific blockchains.</span></li>
+        </ul>
+
+        <h4>themes</h4>
+        <ul class="themes">
+          <li><strong>institutional coordination.</strong> edoo and exeboard solve coordination problems for traditional institutions — schools and boards.</li>
+          <li><strong>governance systems.</strong> exeboard handles formal board governance; dao dao and adjacent tools represent on-chain governance patterns.</li>
+          <li><strong>regenerative finance.</strong> regen network, open forest protocol, toucan, and klimadao focus on ecological credits, carbon markets, mrv, and environmental assets.</li>
+          <li><strong>appchain infrastructure.</strong> cosmos sdk lets projects like regen network run their own chain — custom logic, governance, validators, interoperability.</li>
+          <li><strong>public-goods funding.</strong> gitcoin, giveth, karma, hypercerts, and open source observer help track, fund, and evaluate impact-oriented work.</li>
+          <li><strong>verifiable claims.</strong> cheqd, ixo, hypercerts, and regen all connect to the broader need for trusted data, credentials, attestations, and impact records.</li>
+        </ul>
+
+        <p class="insight"><span class="kw">main insight —</span> across very different domains, the common problem is coordination. schools, boards, daos, ecological-credit markets, and public-goods funders all need trusted records, clear governance, accountability, and reliable reporting. traditional saas usually coordinates within institutions; web3 projects often coordinate across open networks, communities, and markets. they're approaching the same problems from different directions.</p>
+
+        <p class="tags">research<span class="sep">·</span>ecosystem mapping<span class="sep">·</span>web3<span class="sep">·</span>cosmos sdk<span class="sep">·</span>refi<span class="sep">·</span>governance<span class="sep">·</span>saas<span class="sep">·</span>strategy</p>
+      </article>
+    </section>
+
+    <div class="rule" aria-hidden="true">─────────────────────────────────────────────────────────────────────</div>
+
+    <!-- ============ WRITING ============ -->
+    {% set writing = get_section(path="writing/_index.md") %}
+    {% if writing.pages %}
+    <section id="writing" data-screen-label="04 writing">
+      <h2 class="label">writing</h2>
+      <ul class="row-list writing">
+        {% for page in writing.pages %}{% if loop.index <= 5 %}
+        <li class="row">
+          <span class="date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+          <a class="title" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+          <span class="read">{{ page.reading_time }} min</span>
+        </li>
+        {% endif %}{% endfor %}
+      </ul>
+    </section>
+
+    <div class="rule" aria-hidden="true">─────────────────────────────────────────────────────────────────────</div>
+    {% endif %}
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" data-screen-label="05 about">
+      <h2 class="label">about</h2>
+      <div class="prose">
+        <p>i'm jeancarlo barrios. i'm a software engineer. i work mostly on distributed systems — consensus engines, payments rails, durable workflows — and most of what i build is open source.</p>
+        <p>i've spent time researching <a href="https://www.regen.network/" target="_blank" rel="noopener noreferrer">regen network</a> and the <a href="https://docs.cosmos.network/" target="_blank" rel="noopener noreferrer">cosmos sdk</a> — mapping how appchains, ecological credits, and coordination infrastructure fit together. more recently i've been working on the <a href="https://github.com/ybird-labs/claims" target="_blank" rel="noopener noreferrer">claims engine</a> and <a href="https://github.com/ybird-labs/invariant" target="_blank" rel="noopener noreferrer">invariant</a> at ybird-labs.</p>
+        <p>outside of code: i drink a lot of specialty coffee and care about conservation. neither of those things show up here as decoration. they show up as the kinds of problems i pick to work on.</p>
+        <p>if you'd like to talk: <a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a>.</p>
+      </div>
+
+      <h3 class="label" style="margin-top: var(--space-6);">elsewhere</h3>
+      <ul class="elsewhere">
+        <li><a href="{{ config.extra.github }}" target="_blank" rel="noopener noreferrer">github <span class="ext">↗</span></a></li>
+        <li><a href="#" rel="noopener noreferrer">read.cv <span class="ext">↗</span></a></li>
+        <li><a href="#" rel="noopener noreferrer">are.na <span class="ext">↗</span></a></li>
+        <li><a href="{{ get_url(path="atom.xml") }}">rss <span class="ext">↗</span></a></li>
+      </ul>
+    </section>
+
+{% endblock content %}
